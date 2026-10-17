@@ -1,0 +1,8 @@
+{
+  "name": "mapit-export-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Exporta tus rutas de Honda Mapit a GPX desde el navegador, sin guardar contraseñas.",
+  "engines": { "node": ">=20" }
+}

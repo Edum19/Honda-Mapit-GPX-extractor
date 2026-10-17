@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#101211">
+  <title>Rutas Mapit a GPX</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <h1>Rutas Mapit a GPX</h1>
+    <p class="lead">Descarga todas tus rutas de Honda Mapit en archivos GPX. Todo el proceso ocurre en tu navegador.</p>
+  </header>
+
+  <main>
+    <section class="panel" aria-labelledby="h-ledger">
+      <h2 id="h-ledger">Qué se envía y adónde</h2>
+      <table class="ledger">
+        <thead>
+          <tr><th scope="col">Dato</th><th scope="col">Destino</th><th scope="col">¿Se guarda?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Correo y contraseña</th>
+            <td>Directamente a Amazon Cognito, el servicio de acceso de Mapit. No pasan por esta web.</td>
+            <td>No. El campo se vacía al enviarlo.</td>
+          </tr>
+          <tr>
+            <th scope="row">Claves temporales y rutas</th>
+            <td>A la API de Mapit desde tu navegador. Si Mapit lo bloquea, las peticiones pasan por una función de esta web que solo las reenvía.</td>
+            <td>No. Las claves caducan en aproximadamente una hora.</td>
+          </tr>
+          <tr>
+            <th scope="row">Archivos GPX</th>
+            <td>Solo existen en la memoria de esta pestaña hasta que los descargas.</td>
+            <td>No. Sin cuentas, cookies, analítica ni almacenamiento local.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Esta herramienta no es oficial ni tiene relación con Honda ni con Mapit. Usa tu propia cuenta.</p>
+      <p id="conn" class="conn mono" hidden></p>
+    </section>
+
+    <section class="panel" id="step-login" aria-labelledby="h-login">
+      <h2 id="h-login">Conectar con Mapit</h2>
+      <form id="login" autocomplete="on">
+        <label for="email">Correo de Mapit</label>
+        <input id="email" name="username" type="email" autocomplete="username" inputmode="email" required>
+        <label for="password">Contraseña</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <details class="adv">
+          <summary>Ajustes avanzados</summary>
+          <p class="note">Solo si la configuración automática falla.</p>
+          <div class="grid2">
+            <div><label for="o-user_pool_id">User pool id</label><input id="o-user_pool_id" class="mono" data-ov="user_pool_id" spellcheck="false"></div>
+            <div><label for="o-client_id">Client id</label><input id="o-client_id" class="mono" data-ov="client_id" spellcheck="false"></div>
+            <div><label for="o-identity_pool_id">Identity pool id</label><input id="o-identity_pool_id" class="mono" data-ov="identity_pool_id" spellcheck="false"></div>
+            <div><label for="o-core_url">URL core</label><input id="o-core_url" class="mono" data-ov="core_url" spellcheck="false"></div>
+            <div><label for="o-geo_url">URL geo</label><input id="o-geo_url" class="mono" data-ov="geo_url" spellcheck="false"></div>
+          </div>
+        </details>
+        <p id="login-err" class="err" role="alert" hidden></p>
+        <button id="btn-login" class="primary" type="submit">Conectar con Mapit</button>
+      </form>
+    </section>
+
+    <section class="panel" id="step-export" aria-labelledby="h-export" hidden>
+      <h2 id="h-export">Exportar rutas</h2>
+      <div class="grid2">
+        <div>
+          <label for="vehicle">Moto</label>
+          <select id="vehicle"></select>
+        </div>
+        <div>
+          <label for="limit">Límite de rutas (opcional)</label>
+          <input id="limit" type="number" min="1" inputmode="numeric" placeholder="Todas">
+        </div>
+        <div>
+          <label for="since">Desde</label>
+          <input id="since" type="month" value="2019-01" pattern="\d{4}-\d{2}">
+        </div>
+        <div>
+          <label for="until">Hasta</label>
+          <input id="until" type="month" pattern="\d{4}-\d{2}">
+        </div>
+      </div>
+      <p class="note">Para probar, pon un límite de 1 ruta.</p>
+      <div class="actions">
+        <button id="btn-export" class="primary" type="button">Exportar a GPX</button>
+        <button id="btn-list" type="button">Solo listar</button>
+        <button id="btn-stop" type="button" hidden>Detener</button>
+        <button id="btn-logout" type="button">Cerrar sesión y borrar</button>
+      </div>
+      <p id="progress" class="mono prog" aria-live="polite"></p>
+      <pre id="log" class="log mono" role="log" aria-label="Registro" tabindex="0"></pre>
+    </section>
+
+    <section class="panel" id="step-results" aria-labelledby="h-results" hidden>
+      <div class="row">
+        <h2 id="h-results">Rutas exportadas <span id="count" class="mono"></span></h2>
+        <button id="btn-zip" class="primary" type="button">Descargar ZIP</button>
+      </div>
+      <ul id="routes" class="routes"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Los mapas y datos pertenecen a sus titulares. Mapit es una marca de sus propietarios.</p>
+  </footer>
+</body>
+</html>
