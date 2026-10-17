@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#101211">
+  <meta name="theme-color" content="#0B0D10">
   <title>Rutas Mapit a GPX</title>
   <link rel="stylesheet" href="/styles.css">
   <script type="module" src="/js/app.js"></script>
 </head>
 <body>
   <header class="top">
-    <h1>Rutas Mapit a GPX</h1>
-    <p class="lead">Descarga todas tus rutas de Honda Mapit en archivos GPX. Todo el proceso ocurre en tu navegador.</p>
+    <div class="brand"><span class="mark" aria-hidden="true"></span><h1>Mapit<span class="sub">GPX</span></h1></div>
+    <p class="lead">Descarga todas tus rutas de Honda Mapit en archivos GPX. Todo ocurre en tu navegador.</p>
   </header>
 
   <main>
     <section class="panel" aria-labelledby="h-ledger">
-      <h2 id="h-ledger">Qué se envía y adónde</h2>
+      <h2 id="h-ledger"><span class="num">01</span>Qué se envía y adónde</h2>
       <table class="ledger">
         <thead>
           <tr><th scope="col">Dato</th><th scope="col">Destino</th><th scope="col">¿Se guarda?</th></tr>
@@ -46,7 +46,7 @@
     </section>
 
     <section class="panel" id="step-login" aria-labelledby="h-login">
-      <h2 id="h-login">Conectar con Mapit</h2>
+      <h2 id="h-login"><span class="num">02</span>Conectar con Mapit</h2>
       <form id="login" autocomplete="on">
         <label for="email">Correo de Mapit</label>
         <input id="email" name="username" type="email" autocomplete="username" inputmode="email" required>
@@ -76,7 +76,7 @@
     </section>
 
     <section class="panel" id="step-export" aria-labelledby="h-export" hidden>
-      <h2 id="h-export">Exportar rutas</h2>
+      <h2 id="h-export"><span class="num">03</span>Exportar rutas</h2>
       <div class="grid2">
         <div>
           <label for="vehicle">Moto</label>
@@ -107,7 +107,7 @@
         <button id="btn-export" class="primary" type="button">Exportar a GPX</button>
         <button id="btn-list" type="button">Solo listar</button>
         <button id="btn-stop" type="button" hidden>Detener</button>
-        <button id="btn-logout" type="button">Cerrar sesión y borrar</button>
+        <button id="btn-logout" class="ghost" type="button">Cerrar sesión y borrar</button>
       </div>
       <p id="progress" class="mono prog" aria-live="polite"></p>
       <pre id="log" class="log mono" role="log" aria-label="Registro" tabindex="0"></pre>
@@ -115,7 +115,7 @@
 
     <section class="panel" id="step-results" aria-labelledby="h-results" hidden>
       <div class="row">
-        <h2 id="h-results">Rutas exportadas <span id="count" class="mono"></span></h2>
+        <h2 id="h-results"><span class="num">04</span>Rutas exportadas <span id="count" class="mono"></span></h2>
         <button id="btn-zip" class="primary" type="button">Descargar ZIP</button>
       </div>
       <ul id="routes" class="routes"></ul>
