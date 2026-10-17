@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Edum19
+// This file is part of mapit-export-web.
+// Licensed under the GNU GPL v3 or later. See LICENSE for details.
 // Lee la configuración PÚBLICA de app.mapit.me (ids de Cognito y URLs de la API).
 // No recibe ni guarda datos de usuario. No hay logs ni almacenamiento.
 const APP_URL = "https://app.mapit.me/";

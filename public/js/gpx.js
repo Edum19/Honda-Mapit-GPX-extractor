@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Edum19
+// This file is part of mapit-export-web.
+// Licensed under the GNU GPL v3 or later. See LICENSE for details.
 // Conversión de la ruta de Mapit (GeoJSON) a GPX. Port del script mapit_export.py.
 
 const isObj = (x) => x && typeof x === "object" && !Array.isArray(x);

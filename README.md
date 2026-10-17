@@ -76,4 +76,8 @@ Las rutas que descargas son datos de tu cuenta: úsalas conforme a las condicion
 
 ## Licencia
 
-[MIT](LICENSE). © 2026 Edum19.
+Copyright © 2026 Edum19.
+
+Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos de la **GNU General Public License versión 3** publicada por la Free Software Foundation. Se distribuye con la esperanza de que sea útil, pero **sin ninguna garantía**. Consulta el archivo [LICENSE](LICENSE) para el texto completo.
+
+Si redistribuyes este proyecto o una versión modificada, debes hacerlo también bajo GPL v3 y poner a disposición su código fuente completo, incluidos tus cambios.

@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Edum19
+// This file is part of mapit-export-web.
+// Licensed under the GNU GPL v3 or later. See LICENSE for details.
 // Escritor ZIP mínimo (sin compresión) para no cargar librerías de terceros.
 
 const TABLE = (() => {

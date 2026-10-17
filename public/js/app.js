@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Edum19
+// This file is part of mapit-export-web.
+// Licensed under the GNU GPL v3 or later. See LICENSE for details.
 import { Mapit, ApiError, SessionExpired, getConfig, findKey, monthWindows, listMonth, getDetail } from "./mapit.js";
 import { buildRoute, startOf, toDt, setTimeZone, formatLocal, deviceTimeZone } from "./gpx.js";
 import { makeZip } from "./zip.js";

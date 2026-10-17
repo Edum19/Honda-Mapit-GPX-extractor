@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Edum19
+// This file is part of mapit-export-web.
+// Licensed under the GNU GPL v3 or later. See LICENSE for details.
 // Cliente de Mapit que corre en tu navegador.
 // La contraseña solo se usa dentro de login() y no se guarda en ningún objeto.
 
