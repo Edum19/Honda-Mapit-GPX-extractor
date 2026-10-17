@@ -54,10 +54,17 @@ h2 { margin: 0 0 12px; font: 600 1.5rem/1.1 var(--num); letter-spacing: 0.01em; 
 .ledger td { color: var(--text-2); }
 .conn { margin: 12px 0 0; padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--text); }
 @media (max-width: 640px) {
-  .ledger thead { position: absolute; left: -9999px; }
+  .ledger thead { display: none; }
   .ledger, .ledger tbody, .ledger tr, .ledger th, .ledger td { display: block; }
-  .ledger tr { border-top: 1px solid var(--line); padding: 10px 0; }
-  .ledger th, .ledger td { border: 0; padding: 0 0 4px; white-space: normal; }
+  .ledger tr { border-top: 1px solid var(--line); padding: 12px 0; }
+  .ledger th, .ledger td { border: 0; padding: 0 0 8px; white-space: normal; }
+  .ledger th::before, .ledger td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--text-3);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
 }
 
 /* Formularios */
@@ -124,7 +131,10 @@ button.primary:hover:not(:disabled) { background: var(--accent-2); border-color:
 .routes button { min-height: 36px; padding: 4px 12px; }
 #count { color: var(--accent); font-size: 1.1rem; }
 
-footer { color: var(--text-3); font-size: 0.8rem; padding-top: 8px; }
+footer { color: var(--text-3); font-size: 0.8rem; padding-top: 8px; max-width: 75ch; }
+footer p { margin: 0 0 8px; }
+.defs { padding-left: 18px; }
+.defs li { margin: 2px 0; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

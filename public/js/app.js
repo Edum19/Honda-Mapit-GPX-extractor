@@ -1,5 +1,5 @@
 import { Mapit, ApiError, SessionExpired, getConfig, findKey, monthWindows, listMonth, getDetail } from "./mapit.js";
-import { buildRoute, startOf } from "./gpx.js";
+import { buildRoute, startOf, toDt, setTimeZone, formatLocal, deviceTimeZone } from "./gpx.js";
 import { makeZip } from "./zip.js";
 
 const $ = (id) => document.getElementById(id);
@@ -7,6 +7,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const S = { api: null, vehicles: [], routes: new Map(), cancel: false, busy: false };
 
 $("until").value = new Date().toISOString().slice(0, 7);
+$("tz").options[0].textContent = `Zona del dispositivo (${deviceTimeZone()})`;
 
 // ----------------------------------------------------------------- utilidades
 function log(msg) {
@@ -123,6 +124,7 @@ async function run(listOnly) {
   const limit = parseInt($("limit").value, 10) || 0;
   const sel = $("vehicle").value;
   const vehicles = sel === "all" ? S.vehicles : S.vehicles.filter((v) => String(v.id) === sel);
+  setTimeZone($("tz").value);
   S.cancel = false;
   setBusy(true);
   let done = 0, skipped = 0, failed = 0, listed = 0;
@@ -143,7 +145,12 @@ async function run(listOnly) {
           if (!rid) continue;
           listed++;
           if (limit && (listOnly ? listed > limit : done + skipped >= limit)) break outer;
-          if (listOnly) { log(`    ${startOf(it) || "sin fecha"}`); continue; }
+          if (listOnly) {
+            const raw = startOf(it);
+            const d = toDt(raw);
+            log(`    ${raw ?? "sin fecha"}${d ? `  →  ${formatLocal(d)}` : ""}`);
+            continue;
+          }
           if (S.routes.has(String(rid))) { skipped++; progress(); continue; }
           try {
             const r = buildRoute(rid, it, await getDetail(S.api, v.id, rid));

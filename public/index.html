@@ -25,19 +25,19 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Correo y contraseña</th>
-            <td>Directamente a Amazon Cognito, el servicio de acceso de Mapit. No pasan por esta web.</td>
-            <td>No. El campo se vacía al enviarlo.</td>
+            <th scope="row" data-label="Dato">Correo y contraseña</th>
+            <td data-label="Destino">Directamente a Amazon Cognito, el servicio de acceso de Mapit. No pasan por esta web.</td>
+            <td data-label="¿Se guarda?">No. El campo se vacía al enviarlo.</td>
           </tr>
           <tr>
-            <th scope="row">Claves temporales y rutas</th>
-            <td>A la API de Mapit desde tu navegador. Si Mapit lo bloquea, las peticiones pasan por una función de esta web que solo las reenvía.</td>
-            <td>No. Las claves caducan en aproximadamente una hora.</td>
+            <th scope="row" data-label="Dato">Claves temporales y rutas</th>
+            <td data-label="Destino">A la API de Mapit desde tu navegador. Si Mapit lo bloquea, las peticiones pasan por una función de esta web que solo las reenvía.</td>
+            <td data-label="¿Se guarda?">No. Las claves caducan en aproximadamente una hora.</td>
           </tr>
           <tr>
-            <th scope="row">Archivos GPX</th>
-            <td>Solo existen en la memoria de esta pestaña hasta que los descargas.</td>
-            <td>No. Sin cuentas, cookies, analítica ni almacenamiento local.</td>
+            <th scope="row" data-label="Dato">Archivos GPX</th>
+            <td data-label="Destino">Solo existen en la memoria de esta pestaña hasta que los descargas.</td>
+            <td data-label="¿Se guarda?">No. Sin cuentas, cookies, analítica ni almacenamiento local.</td>
           </tr>
         </tbody>
       </table>
@@ -54,7 +54,14 @@
         <input id="password" name="password" type="password" autocomplete="current-password" required>
         <details class="adv">
           <summary>Ajustes avanzados</summary>
-          <p class="note">Solo si la configuración automática falla.</p>
+          <p class="note">Son los identificadores públicos que usa la web oficial de Mapit para iniciar sesión y consultar la API. No son secretos ni contraseñas. La herramienta los detecta sola en app.mapit.me; solo tendrás que rellenarlos si Mapit cambia su web y la detección falla.</p>
+          <ul class="note defs">
+            <li><b>User pool id:</b> el directorio de usuarios donde está tu cuenta (Amazon Cognito).</li>
+            <li><b>Client id:</b> el identificador de la app de Mapit ante ese directorio.</li>
+            <li><b>Identity pool id:</b> intercambia tu sesión por claves temporales de acceso.</li>
+            <li><b>URL core:</b> API de la cuenta y las motos.</li>
+            <li><b>URL geo:</b> API de las rutas.</li>
+          </ul>
           <div class="grid2">
             <div><label for="o-user_pool_id">User pool id</label><input id="o-user_pool_id" class="mono" data-ov="user_pool_id" spellcheck="false"></div>
             <div><label for="o-client_id">Client id</label><input id="o-client_id" class="mono" data-ov="client_id" spellcheck="false"></div>
@@ -87,6 +94,13 @@
           <label for="until">Hasta</label>
           <input id="until" type="month" pattern="\d{4}-\d{2}">
         </div>
+        <div>
+          <label for="tz">Zona horaria de fechas y nombres de archivo</label>
+          <select id="tz">
+            <option value="">Zona del dispositivo</option>
+            <option value="UTC">UTC</option>
+          </select>
+        </div>
       </div>
       <p class="note">Para probar, pon un límite de 1 ruta.</p>
       <div class="actions">
@@ -109,7 +123,8 @@
   </main>
 
   <footer>
-    <p>Los mapas y datos pertenecen a sus titulares. Mapit es una marca de sus propietarios.</p>
+    <p>© 2026 Edum19. Software libre bajo licencia MIT, ofrecido «tal cual», sin garantía de ningún tipo.</p>
+    <p>Proyecto independiente y no oficial: no está afiliado, patrocinado ni respaldado por Honda ni por Mapit. Honda, Mapit y sus logotipos son marcas de sus respectivos titulares y se citan solo para indicar con qué servicios es compatible. Las rutas descargadas son datos de tu cuenta: úsalas conforme a las condiciones de servicio de Mapit.</p>
   </footer>
 </body>
 </html>

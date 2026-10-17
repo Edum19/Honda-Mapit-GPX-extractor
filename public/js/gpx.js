@@ -197,16 +197,34 @@ function first(dicts, keys) {
 export const startOf = (item) => first([item], START_K);
 
 const slug = (s) => String(s).replace(/[^\p{L}\p{N}_-]+/gu, "_").replace(/^_+|_+$/g, "").slice(0, 50);
-const p2 = (n) => String(n).padStart(2, "0");
+
+// Zona horaria para mostrar fechas y nombrar archivos. undefined = la del dispositivo
+// (la que marca el sistema operativo; no se usa ubicación). El GPX siempre guarda UTC.
+let TZ;
+export function setTimeZone(tz) { TZ = tz || undefined; }
+export function deviceTimeZone() { return Intl.DateTimeFormat().resolvedOptions().timeZone; }
+
+export function formatLocal(d) {
+  return new Intl.DateTimeFormat("es-ES", {
+    weekday: "short", day: "numeric", month: "short", year: "numeric",
+    hour: "2-digit", minute: "2-digit", timeZoneName: "short", timeZone: TZ,
+  }).format(d);
+}
+
+function stamp(d) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
+    hourCycle: "h23", timeZone: TZ,
+  }).formatToParts(d).map((x) => [x.type, x.value]));
+  return `${p.year}-${p.month}-${p.day}_${p.hour}${p.minute}`;
+}
 
 export function routeFilename(rid, item, detail) {
   const ctx = [item, detail];
   if (isObj(detail)) ctx.push(detail.route, detail.data);
   const start = toDt(first(ctx, START_K));
   const name = first(ctx, NAME_K);
-  const date = start
-    ? `${start.getFullYear()}-${p2(start.getMonth() + 1)}-${p2(start.getDate())}_${p2(start.getHours())}${p2(start.getMinutes())}`
-    : "undated";
+  const date = start ? stamp(start) : "undated";
   const parts = [date, name ? slug(name) : null, slug(rid).slice(-8)].filter(Boolean);
   return { filename: parts.join("_") + ".gpx", title: name || (start ? date : String(rid)), start };
 }
