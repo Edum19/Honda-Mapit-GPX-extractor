@@ -45,7 +45,7 @@ body {
   padding-right: 16px;
 }
 .brand { display: flex; align-items: center; gap: 10px; }
-.mark { width: 10px; height: 10px; background: var(--gold); display: inline-block; flex: none; }
+.logo { width: 28px; height: 28px; flex: none; display: block; }
 h1 {
   margin: 0;
   font: 700 24px/1 var(--cond);
